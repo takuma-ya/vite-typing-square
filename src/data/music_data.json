@@ -1,0 +1,112 @@
+[
+  {
+    "number": 1,
+    "src": "BKOJ001_91BPM.mp3",
+    "note": "BKOJ001_91BPM.json",
+    "time": 75000,
+    "bpm": 91,
+    "first_ts": 11260,
+    "beat": 4,
+    "volume": 0.5,
+    "character": "kohaku_dj.png"
+  },
+  {
+    "number": 2,
+    "src": "BKOJ002_81BPM.mp3",
+    "note": "BKOJ002_81BPM.json",
+    "time": 96000,
+    "bpm": 81,
+    "first_ts": 6320,
+    "beat": 4,
+    "volume": 0.5,
+    "character": "kohaku_dj.png"
+  },
+  {
+    "number": 3,
+    "src": "BKOJ003_120BPM.mp3",
+    "note": "BKOJ003_120BPM.json",
+    "time": 48500,
+    "bpm": 120,
+    "first_ts": 8500,
+    "beat": 3,
+    "volume": 0.5,
+    "character": "kohaku_dj.png"
+  },
+  {
+    "number": 4,
+    "src": "canon.mp3",
+    "note": "canon.json",
+    "time": 87000,
+    "bpm": 90,
+    "first_ts": 11500,
+    "beat": 4,
+    "volume": 1.0,
+    "character": "kohaku_conductor.png"
+  },
+  {
+    "number": 5,
+    "src": "reggae.mp3",
+    "note": "reggae.json",
+    "time": 97000,
+    "bpm": 82,
+    "first_ts": 12670,
+    "beat": 4,
+    "volume": 0.5,
+    "character": "kohaku_dj.png"
+  },
+  {
+    "number": 6,
+    "src": "kurumi.mp3",
+    "note": "kurumi.json",
+    "time": 74000,
+    "bpm": 134,
+    "first_ts": 8065,
+    "beat": 4,
+    "volume": 5,
+    "character": "kohaku_conductor.png"
+  },
+  {
+    "number": 7,
+    "src": "carmen.mp3",
+    "note": "carmen.json",
+    "time": 60000,
+    "bpm": 135,
+    "first_ts": 4060,
+    "beat": 1,
+    "volume": 1.0,
+    "character": "kohaku_conductor.png"
+  },
+  {
+    "number": 8,
+    "src": "Sleepiness.mp3",
+    "note": "Sleepiness.json",
+    "time": 8400,
+    "bpm": 93,
+    "first_ts": 5840,
+    "beat": 2,
+    "volume": 1.0,
+    "character": "kohaku_drum.png"
+  },
+  {
+    "number": 9,
+    "src": "magical_cooking.mp3",
+    "note": "magical_cooking.json",
+    "time": 67000,
+    "bpm": 72.6,
+    "first_ts": 7265,
+    "beat": 2,
+    "volume": 1.0,
+    "character": "kohaku_piano.png"
+  },
+  {
+    "number": 10,
+    "src": "pops_up_the_mind_wings.mp3",
+    "note": "pops_up_the_mind_wings.json",
+    "time": 48500,
+    "bpm": 105,
+    "first_ts": 4870,
+    "beat": 2,
+    "volume": 1.0,
+    "character": "kohaku_piano.png"
+  }
+]

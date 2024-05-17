@@ -1,0 +1,1 @@
+create table typing_square.scores (user_id int unsigned, music_id int unsigned, score int unsigned, rate int unsigned, date datetime);

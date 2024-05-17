@@ -1,0 +1,93 @@
+[
+  {
+    "id": 10,
+    "title": "Pops up the mind wings",
+    "level": "★★☆☆☆",
+    "category": "ジャズ",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/atou_spring.jpg"
+  },
+  {
+    "id": 9,
+    "title": "魔法のクッキング",
+    "level": "★★★☆☆",
+    "category": "ジャズ",
+    "score": "90",
+    "rate": 100,
+    "image": "/images/vegitables.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Sleepiness",
+    "level": "★★☆☆☆",
+    "category": "ロック",
+    "score": "75",
+    "rate": 60,
+    "image": "/images/star.jpg"
+  },
+  {
+    "id": 7,
+    "title": "カルメン",
+    "level": "★☆☆☆☆",
+    "category": "クラシック",
+    "score": "65",
+    "rate": 100,
+    "image": "/images/rose.jpg"
+  },
+  {
+    "id": 6,
+    "title": "くるみ割り人形：行進曲",
+    "level": "★★☆☆☆",
+    "category": "クラシック",
+    "score": "85",
+    "rate": 100,
+    "image": "/images/kurumi.jpg"
+  },
+  {
+    "id": 5,
+    "title": "reggae time",
+    "level": "★☆☆☆☆",
+    "category": "ヒップホップ",
+    "score": "70",
+    "rate": 70,
+    "image": "/images/sunset_beach.jpg"
+  },
+  {
+    "id": 4,
+    "title": "canon",
+    "level": "★★★★★",
+    "category": "クラシック",
+    "score": "95",
+    "rate": 100,
+    "image": "/images/sunflower.jpg"
+  },
+  {
+    "id": 3,
+    "title": "proper dose",
+    "level": "★★★☆☆",
+    "category": "ヒップホップ",
+    "score": "88",
+    "rate": 88,
+    "image": "/images/dangeon.jpg"
+  },
+  {
+    "id": 2,
+    "title": "road",
+    "level": "★★★★☆",
+    "category": "ヒップホップ",
+    "score": "92",
+    "rate": 92,
+    "image": "/images/summar_road.jpg"
+  },
+  {
+    "id": 1,
+    "title": "sunset",
+    "level": "★★☆☆☆",
+    "category": "ヒップホップ",
+    "score": "78",
+    "rate": 78,
+    "image": "/images/buildings_and_sunset.jpg"
+  }
+]
+
