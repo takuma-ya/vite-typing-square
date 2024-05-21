@@ -32,7 +32,13 @@ router.get('/', function (req, res, next) {
               scores[music_id-1] = results_score[i].score;
               rates[music_id-1] = results_score[i].rate;
             }
-            res.json({ score: scores, rate: rates }); 
+            res.json({ 
+              score: scores,
+              rate: rates,
+              isAuth: isAuth, 
+              userName: results_user[0].name, 
+              errorMessage: error
+            }); 
           })
       })
       .catch(function (err) {
@@ -41,14 +47,26 @@ router.get('/', function (req, res, next) {
         scores.fill(-1);
         let rates = Array(num_music);
         rates.fill(-1);
-        res.json({ score: scores, rate: rates }); 
+        res.json({ 
+          score: scores,
+          rate: rates,
+          isAuth: isAuth, 
+          userName: "", 
+          errorMessage: error
+        }); 
       });
   } else {
     let scores = Array(num_music);
     scores.fill(0);
     let rates = Array(num_music);
     rates.fill(0);
-    res.json({ score: scores, rate: rates }); 
+    res.json({ 
+      score: scores,
+      rate: rates,
+      isAuth: isAuth, 
+      userName: "", 
+      errorMessage: error
+    }); 
   }
 });
 

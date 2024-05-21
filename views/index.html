@@ -4,12 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Takuma Yamashita">
-    <link rel="icon" href="/images/typing-square.ico">
+    <link rel="icon" href="images/typing-square.ico">
     <title>【Typing Square】音ゲー感覚で遊べるタイピングゲーム広場</title>
     <meta name="description" content="Typing Squareはリズムゲームの要素を組み込んだ無料のタイピングゲームです。音楽に沿ってランダムに流れてくるキーをタイミングよく叩いてハイスコアを目指そう！">
 
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
   </head>
+
+  <% if (isProduction) { %>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9GMBD15D7C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9GMBD15D7C');
+    </script>
+  <% } %>
+
+  <% if (! isProduction) { %>
+    <script type="module">
+      import RefreshRuntime from 'http://localhost:3000/@react-refresh'
+      RefreshRuntime.injectIntoGlobalHook(window)
+      window.$RefreshReg$ = () => {}
+      window.$RefreshSig$ = () => (type) => type
+      window.__vite_plugin_react_preamble_installed__ = true
+    </script>
+  <% } %>
 
 <!-- Google tag (gtag.js) -->
 <!--
@@ -24,6 +45,7 @@
 -->
 
 <!-- https://ja.vitejs.dev/guide/backend-integration.html -->
+<!--
 <script type="module">
   import RefreshRuntime from 'http://localhost:3000/@react-refresh'
   RefreshRuntime.injectIntoGlobalHook(window)
@@ -31,6 +53,7 @@
   window.$RefreshSig$ = () => (type) => type
   window.__vite_plugin_react_preamble_installed__ = true
 </script>
+-->
 
   <body>
     <main class="bg-body-secondary">
@@ -39,68 +62,12 @@
           <img src="/images/logo.png">
         </a>-->
         <a href="/" style="width: 80%; text-align: center">
-          <img src="/images/logo.png"style="width: 70%">
+          <img src="/images/logo.png" style="width: 70%">
         </a>
-        <!--
-        <ul class="nav nav-pills">
-          <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-        </ul>
-        -->
         
       </header>
       <div class="container">
-        <div class="row">
-          <div class="col-sm-10">
-            <div class="mx-1 p-3 bg-body">
-              <!--
-              <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-                <h1 class="display-4">楽曲一覧</h1>
-                <p class="lead">遊ぶ曲を選んでね。</p>
-              </div>-->
-              <div id="root"></div>
-            </div>
-          </div>
-          <div class="col-sm-2 bg-body">
-            <div class="mx-1 p-3">
-              <% if(isAuth) { %>
-                <p>ようこそ、<%= userName %>さん</p>
-                    <form action="logout" method="get">
-                      <div class="text-end">
-                        <button type="submit" class="btn btn-secondary btn-sm mb-4">ログアウト</button>
-                      </div>
-                    </form>
-              <% } else { %>
-                <p>ログインしているとスコアを保存できるよ！</p>
-              <% } %>
-              <form class="needs-validation" action="?" method="post">
-                <label for="username" class="form-label">お名前</label>
-                <input type="text" class="form-control mb-sm-2" id="username" name="username" placeholder="" value="" required="required">
-                <!--<div class="invalid-feedback">
-                  Valid name is required.
-                </div>-->
-                <label for="password" class="form-label">合言葉</label>
-                <input type="text" class="form-control mb-sm-2" id="password" name="password" placeholder="" value="" required="required">
-                <!-- <div class="invalid-feedback">
-                  Valid password is required.
-                </div>-->
-                <div class="row">
-                  <div class="col-sm-6 ">
-                    <button type="submit" class="btn btn-success btn-sm" formaction="signup">新規登録</button>
-                  </div>
-                  <div class="col-sm-6">
-                    <button type="submit" class="btn btn-primary btn-sm" formaction="signin">ログイン</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <% if (typeof errorMessage === 'undefined') { var errorMessage = []; } %>
-            <% if(errorMessage.length != 0){ %>
-              <div>
-                <p><%= errorMessage %></p>
-              </div>
-            <% } %>
-          </div>
-        </div>
+        <div id="root"></div>
       </div>
 
      
@@ -128,7 +95,8 @@
         </div>
       </div>
 
-      <div class="modal fade" id="recordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <% if (! isProduction) { %>
+      <div class="modal fade" id="record-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
           <div class="modal-content">
             <div class="modal-header">
@@ -140,13 +108,12 @@
         </div>
       </div>
     </main>
-
+  <% } %>
 
     <script src="javascripts/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
-    <script type="module" src="src/main.jsx"></script>
+    <script type="module" src="../src/main.jsx"></script>
     <script src="javascripts/utils.js"></script>
-    <script src="javascripts/record.js"></script>
       
   </body>
 </html>

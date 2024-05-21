@@ -19,9 +19,12 @@ function App() {
   const [sortOrder, setSortOrder] = useState('desc'); // 初期値は降順
   const [filterLevel, setFilterLevel] = useState(''); // 初期値は全てのレベル
   const [filterCategory, setFilterCategory] = useState(''); // 初期値は全てのカテゴリ
+  const [isAuth, setIsAuth] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const fetchScore = async () => { 
-    fetch('/score')
+  const fetchUserData = async () => { 
+    fetch('/user_data')
     .then(response => response.json())
     .then(data => {
         // 取得したデータをログに出力
@@ -32,14 +35,16 @@ function App() {
         stored_data = data
         setScores(stored_data.score);
         setRates(stored_data.rate);
-        console.log("score", scores);
+        setIsAuth(data.isAuth);
+        setUserName(data.userName);
+        setErrorMessage(data.errorMessage);
     })
     .catch(error => {
         console.error('Error fetching data:', error);
     })
   };
 
-  const fetchData = async () => {
+  const fetchMusicData = async () => {
     fetch('jsons/music_data.json')
     .then(response => response.json())
     .then(data => {
@@ -53,6 +58,32 @@ function App() {
         console.error('Error fetching data:', error);
     })
   };
+/*
+  const handleFormSubmit = (e, action) => {
+    console.log("e",e);
+    console.log("action",action);
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    fetch(action, {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          setIsAuth(true);
+          setUserName(data.userName);
+        } else {
+          setErrorMessage(data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error submitting form:', error);
+        setErrorMessage('An error occurred.');
+      });
+  };
+*/
 
   // レベルフィルタリング用のハンドラ
   const handleLevelFilter = (level) => {
@@ -144,8 +175,8 @@ function App() {
       console.log("loading",loading);
       return;
     }
-    fetchScore();
-    fetchData();
+    fetchUserData();
+    fetchMusicData();
     // 初期化済みのフラグを立てる
     setLoading(false);
     closeBtn = document.getElementById("btn-close");
@@ -160,110 +191,137 @@ function App() {
 
 
   return (
-    <>
+    <div className="row">
+      <div className="col-sm-10">
+        <div className="mx-1 p-3 bg-body">
       {/* ソートセレクトボックス */}
-      <div className="mb-3">
-        {/*<label htmlFor="sortSelect" className="form-label me-2">
-          ソート:
-        </label>*/}
-        <select id="sortSelect" className="form-select form-select-sm me-2" onChange={handleSortChange}>
-          <option value="id_desc">新しい順</option>
-          <option value="id_asc">古い順</option>
-          {/* <option value="rate_desc">スコア割合が高い順</option>
-          <option value="rate_asc">スコア割合が低い順</option> */}
-          <option value="level_asc">レベルが高い順</option>
-          <option value="level_desc">レベルが低い順</option>
-        </select>
-      </div>
+          <div className="mb-3">
+            {/*<label htmlFor="sortSelect" className="form-label me-2">
+              ソート:
+            </label>*/}
+            <select id="sortSelect" className="form-select form-select-sm me-2" onChange={handleSortChange}>
+              <option value="id_desc">新しい順</option>
+              <option value="id_asc">古い順</option>
+              {/* <option value="rate_desc">スコア割合が高い順</option>
+              <option value="rate_asc">スコア割合が低い順</option> */}
+              <option value="level_asc">レベルが高い順</option>
+              <option value="level_desc">レベルが低い順</option>
+            </select>
+          </div>
 
-      <div className="mb-3">
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('')}>
-          全てのレベル
-        </button>
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('★☆☆☆☆')}>
-          ★☆☆☆☆
-        </button>
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('★★☆☆☆')}>
-          ★★☆☆☆
-        </button>
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('★★★☆☆')}>
-          ★★★☆☆
-        </button>
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('★★★★☆')}>
-          ★★★★☆
-        </button>
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('★★★★★')}>
-          ★★★★★
-        </button>
-      </div>
+          <div className="mb-3">
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('')}>
+              全てのレベル
+            </button>
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('★☆☆☆☆')}>
+              ★☆☆☆☆
+            </button>
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('★★☆☆☆')}>
+              ★★☆☆☆
+            </button>
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('★★★☆☆')}>
+              ★★★☆☆
+            </button>
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('★★★★☆')}>
+              ★★★★☆
+            </button>
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter('★★★★★')}>
+              ★★★★★
+            </button>
+          </div>
 
-      <div className="mb-3">
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('')}>
-          全てのカテゴリ
-        </button>
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('クラシック')}>
-          クラシック
-        </button>
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('ジャズ')}>
-          ジャズ
-        </button>
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('ヒップホップ')}>
-          ヒップホップ
-        </button>
-        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('ロック')}>
-          ロック
-        </button>
-      </div>
+          <div className="mb-3">
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('')}>
+              全てのカテゴリ
+            </button>
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('クラシック')}>
+              クラシック
+            </button>
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('ジャズ')}>
+              ジャズ
+            </button>
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('ヒップホップ')}>
+              ヒップホップ
+            </button>
+            <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('ロック')}>
+              ロック
+            </button>
+          </div>
 
-      {/* 音楽カード表示 */}
-      <div className="row">
-          {filteredAndSortedData().map((music) => (
-            <div key={music.id} className="col-sm-3 my-2">
-              <div className="card" style={{ width: '100%' }}>
-                <img src={music.image} className="card-img-top" style={{ width: '100%', aspectRatio: '1.5' }} alt="..." />
-                <div className="card-body">
-                  <h5 className="card-title">{music.title}</h5>
-                  <p className="card-text">レベル：
-                    <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter(music.level)}> {music.level} </button>
-                  </p>
-                  <p className="card-text">カテゴリ：
-                    <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter(music.category)}> {music.category} </button>
-                  </p>
-                  {rates[music.id-1] === 100 ? (
-                    <p>
-                      最高スコア：<strong id={`score-${music.id}`} className="text-success">{scores[music.id-1]}</strong>(
-                      <strong id={`rate-${music.id}`} className="text-success">{rates[music.id-1]}</strong>%)
-                    </p>
-                  ) : (
-                    <p>
-                      最高スコア：<strong id={`score-${music.id}`}>{scores[music.id-1]}</strong>(
-                      <strong id={`rate-${music.id}`}>{rates[music.id-1]}</strong>%)
-                    </p>
-                  )}
-                  <button type="button" className="btn btn-info btn-selector" data-bs-toggle="modal" data-bs-target="#game-modal" onClick={() => {startGame(music.id)}}> 
-                    Play Game!
-                  </button>
+          {/* 音楽カード表示 */}
+          <div className="row">
+              {filteredAndSortedData().map((music) => (
+                <div key={music.id} className="col-sm-3 my-2">
+                  <div className="card" style={{ width: '100%' }}>
+                    <img src={music.image} className="card-img-top" style={{ width: '100%', aspectRatio: '1.5' }} alt="..." />
+                    <div className="card-body">
+                      <h5 className="card-title">{music.title}</h5>
+                      <p className="card-text">レベル：
+                        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter(music.level)}> {music.level} </button>
+                      </p>
+                      <p className="card-text">カテゴリ：
+                        <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter(music.category)}> {music.category} </button>
+                      </p>
+                      {rates[music.id-1] === 100 ? (
+                        <p>
+                          最高スコア：<strong id={`score-${music.id}`} className="text-success">{scores[music.id-1]}</strong>(
+                          <strong id={`rate-${music.id}`} className="text-success">{rates[music.id-1]}</strong>%)
+                        </p>
+                      ) : (
+                        <p>
+                          最高スコア：<strong id={`score-${music.id}`}>{scores[music.id-1]}</strong>(
+                          <strong id={`rate-${music.id}`}>{rates[music.id-1]}</strong>%)
+                        </p>
+                      )}
+                      <button type="button" className="btn btn-info btn-selector" data-bs-toggle="modal" data-bs-target="#game-modal" onClick={() => {startGame(music.id)}}> 
+                        Play Game!
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
-      </div>
-      {/* モーダル */}
-      {/*
-      <div className="modal fade" id="game-modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-fullscreen">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="btn-close" id="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => {tearDown()}}></button>
-            </div>
-            <div className="modal-body" id="modal-body">
-            </div>
+              ))}
           </div>
         </div>
       </div>
-      */}
-    </>
-    )
+
+      <div className="col-sm-2 bg-body">
+        <div className="mx-1 p-3">
+          {isAuth ? (
+            <>
+              <p>ようこそ、{userName}さん</p>
+              <form action="logout" method="get">
+                <div className="text-end">
+                  <button type="submit" className="btn btn-secondary btn-sm mb-4">ログアウト</button>
+                </div>
+              </form>
+            </>
+          ) : (
+            <p>ログインしているとスコアを保存できるよ！</p>
+          )}
+          <form className="needs-validation" action="?" method="post">
+{/* onSubmit={(e) => handleFormSubmit(e, e.target.action)}> */}
+            <label htmlFor="username" className="form-label">お名前</label>
+            <input type="text" className="form-control mb-sm-2" id="username" name="username" required />
+            <label htmlFor="password" className="form-label">合言葉</label>
+            <input type="text" className="form-control mb-sm-2" id="password" name="password" required />
+            <div className="row">
+              <div className="col-sm-6">
+                <button type="submit" className="btn btn-success btn-sm" formAction="signup">新規登録</button>
+              </div>
+              <div className="col-sm-6">
+                <button type="submit" className="btn btn-primary btn-sm" formAction="signin">ログイン</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        {errorMessage && (
+          <div>
+            <p>{errorMessage}</p>
+          </div>
+        )}
+      </div>
+    </div>
+    );
 }
 
 export default App

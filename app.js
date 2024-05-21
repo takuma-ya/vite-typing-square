@@ -6,6 +6,7 @@ import logger from 'morgan'
 import cookieSession from "cookie-session"
 import route from "./routes/index.js"
 import url from "node:url"
+import ejs from "ejs"
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const secret = "secretCuisine123";
 
@@ -22,8 +23,14 @@ app.use(
 );
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+if (process.env.NODE_ENV === 'production') {
+  app.set('views', path.join(__dirname, 'dist/views'));
+}
+else {
+  app.set('views', path.join(__dirname, 'views'));
+}
 app.set('view engine', 'ejs');
+app.engine('html', ejs.renderFile); //viteで解釈できるようにhtmlに変更
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -74,6 +81,7 @@ var port = normalizePort(process.env.PORT || '3000');
  * Create HTTP server.
  */
 
+//viteExpress.config({ mode: "production" })
 //var server = viteExpress.listen(app, 3000, () => console.log("Server is listening..."));
 viteExpress.listen(app, port, () => console.log("Server is listening..."));
 //var server = http.createServer(app);
