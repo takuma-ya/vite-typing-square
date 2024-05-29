@@ -4,6 +4,7 @@ import { register_music, PhaserGame } from './game.js'
 let phaserGame;
 let game;
 let closeBtn;
+let closeBtnRecord;
 let stored_data;
 let music_id;
 window.score = -1;
@@ -156,7 +157,12 @@ function App() {
     window.rate = stored_data.rate[music_id-1]
     phaserGame = new PhaserGame();
     game = phaserGame.init(id);
-    console.log("hello")
+  }
+
+  const recordGame = (id) => {
+    music_id = id;
+    phaserGame = new PhaserGame("record");
+    game = phaserGame.init(id);
   }
 
   const tearDown = () => {
@@ -180,11 +186,16 @@ function App() {
     // 初期化済みのフラグを立てる
     setLoading(false);
     closeBtn = document.getElementById("btn-close");
+    closeBtnRecord = document.getElementById("btn-close-record");
     closeBtn.addEventListener('click', tearDown);
+    closeBtnRecord.addEventListener('click', tearDown);
     // クリーンアップ関数を返してイベントリスナーを削除
     return () => {
         if (closeBtn) {
             closeBtn.removeEventListener('click', tearDown);
+        }
+        if (closeBtnRecord) {
+            closeBtnRecord.removeEventListener('click', tearDown);
         }
     };
   }, []);
@@ -275,6 +286,9 @@ function App() {
                       )}
                       <button type="button" className="btn btn-info btn-selector" data-bs-toggle="modal" data-bs-target="#game-modal" onClick={() => {startGame(music.id)}}> 
                         Play Game!
+                      </button>
+                      <button type="button" className="btn btn-info btn-selector" data-bs-toggle="modal" data-bs-target="#record-modal" onClick={() => {recordGame(music.id)}}> 
+                        Record Game!
                       </button>
                     </div>
                   </div>

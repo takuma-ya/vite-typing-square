@@ -6,7 +6,9 @@ let sound_collision;
 let sound_beep;
 let score;
 let full_score;
+let type;
 let closeBtn = document.getElementById("btn-close");
+let closeBtnRecord = document.getElementById("btn-close-record");
 
 
 function register_music(music_id) {
@@ -57,7 +59,19 @@ class Music {
 }
 
 class PhaserGame {
+    constructor(game_type="") {
+        type = game_type;
+    }
+
+
     init(id) {
+        if (type == "record") {
+            this.parent_id = `modal-body-record`;
+        }
+        else {
+            this.parent_id = `modal-body`;
+        }
+        console.log("parent",this.parent_id);
         music = register_music(id);
         let config = {
             type: Phaser.AUTO,
@@ -65,7 +79,7 @@ class PhaserGame {
                 mode: Phaser.Scale.FIT,
                 autoCenter: Phaser.Scale.CENTER_BOTH
             },
-            parent: `modal-body`,
+            parent: this.parent_id,
             width: 1920,
             height: 1080,
             scene: MenuScene,
@@ -142,11 +156,18 @@ class MainScene {
 
     async create() {
         // Notes timestamps, made with the other script "record.html". They are relative to the start of the song, meaning a value of 1000 equals to 1 second after the song has started
-        this.notesTimestamps = this.getNote();
+        if (type == "record") {
+            this.notesTimestamps = this.getRecordNote();
+        }
+        else {
+            this.notesTimestamps = this.getNote();
+        }
         full_score = Object.keys(this.notesTimestamps).length;
         this.timeToFall = 2000; // ms, time for the note to go to the bottom. The lower the faster/hardest
         this.lastNoteIndex = 0; // last note spawned
         this.notes = [];        // array of notes already spawned
+        this.notesRecord = [];  // timestamp array of notes already spawned
+        this.record = [];
         this.colliders = [];    // colliders for player input vs falling note
         this.characters = ["KeyA", "KeyB", "KeyC", "KeyD", "KeyE", "KeyF", "KeyG", "KeyH", "KeyI", "KeyJ", "KeyK", "KeyL", "KeyM", "KeyN", "KeyO", "KeyP", "KeyQ", "KeyR", "KeyS", "KeyT", "KeyU", "KeyV", "KeyW", "KeyX", "KeyY", "KeyZ"];
         this.charIndex = 0;
@@ -169,6 +190,12 @@ class MainScene {
         this.scoreText = this.add.text(100, 100, "SCORE", { fontFamily: "arial", fontSize: "100px" });
         score = 0;
 
+        if (type == "record") {
+            this.collider_size = 100;
+        }
+        else {
+            this.collider_size = 150;
+        }
         this.scene.add("result", ResultScene);
         // We create the audio object and play it
         sound = this.sound.add("music");
@@ -204,7 +231,12 @@ class MainScene {
                 note.spawned != true
                 && note.timestamp <=  Math.floor(sound.seek * 1000) - this.startTime + this.timeToFall
             ) {
-                this.spawnNote();
+              if (type == "record") {
+                  this.spawnRecordNote(note.is_main, note.timestamp);
+              }
+              else {
+                  this.spawnNote();
+              }
                 this.lastNoteIndex = i;
                 note.spawned = true;
             }
@@ -221,11 +253,28 @@ class MainScene {
         this.physics.moveTo(note, 200, 800, null, this.timeToFall);
     }
 
+    spawnRecordNote(is_main, timestamp) {
+        // This is self explanatory. Spawn the note and let it fall to the bottom.
+        //let note = this.add.circle(1920 / 2, 0, 20, 0xffff00);
+        this.charIndex = 9;
+        let note;
+        if (is_main == 1){
+            note = this.add.image(1920, 800, this.characters[this.charIndex]).setDisplaySize(150,150);
+        }
+        else {
+            note = this.add.image(1920, 800, this.characters[this.charIndex]).setDisplaySize(100,100);
+        }
+        this.notes.push(note);
+        this.notesRecord.push(timestamp);
+        this.physics.add.existing(note);
+        this.physics.moveTo(note, 200, 800, null, this.timeToFall);
+    }
+
     handlePlayerInput() {
         this.firstKeysPressed = getFirstKeysPressed()
         if (this.firstKeysPressed.length != 0) {
             // we create a new collider at the position of the red bar
-            let collider = this.add.image(200, 800, "Stamp").setDisplaySize(150,150);
+            let collider = this.add.image(200, 800, "Stamp").setDisplaySize(this.collider_size,this.collider_size);
 
             // attach physics
             this.physics.add.existing(collider);
@@ -266,11 +315,19 @@ class MainScene {
 
                  // remove the collider from list
                  this.colliders.splice(this.colliders.indexOf(collider), 1);
+                 if (type == "record") {
+                     // destroy the note and remove from list
+                     let t = {}
+                     console.log(this.notesRecord[this.notes.indexOf(note)]);
+                     t.timestamp = this.notesRecord[this.notes.indexOf(note)];
+                     this.record.push(t);
+                     this.notesRecord.splice(this.notes.indexOf(note), 1);
+                 }
+                 this.notes.splice(this.notes.indexOf(note), 1);
 
                  // destroy the note and remove from list
                  note.destroy();
-                 this.notes.splice(this.notes.indexOf(note), 1);
-
+                 
                  // increase the score and update the text
                  score += 100;
                  this.updateScoreText();
@@ -304,6 +361,9 @@ class MainScene {
     checkFinished() {
         
         if ( Math.floor(sound.seek * 1000) - this.startTime >= this.endTimestamp) {
+            if (type == "record") {
+                console.log(this.record);
+            }
             this.scene.start("result");
         }
     }
@@ -313,6 +373,29 @@ class MainScene {
         request.open("GET", "/jsons/" + music.note, false);
         request.send(null);
         return JSON.parse(request.responseText);
+    }
+
+    getRecordNote() {
+        let timestamps = [];
+        let span = 1000 * 60 / music.bpm / music.beat;
+        let timestamp = {};
+        let i = 0;
+        while(1) { 
+            let t = {};
+            timestamp = Math.floor(music.first_ts + span * i);
+            if (timestamp >= music.time)
+                break;
+            t.timestamp = timestamp;
+            if (i % music.beat == 0) {
+                t.is_main = 1
+            }
+            else {
+                t.is_main = 0
+            }
+            timestamps.push(t);
+            i += 1;
+        }
+        return timestamps;
     }
 }
 
@@ -377,7 +460,12 @@ class ResultScene {
             xmlHttpRequest.setRequestHeader("content-type", "application/json");
             xmlHttpRequest.send(JSON.stringify(data));
 
-            closeBtn.click()
+            if (type == "record") {
+                closeBtnRecord.click();
+            }
+            else {
+                closeBtn.click();
+            }
         }
     }
 }
