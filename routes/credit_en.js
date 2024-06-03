@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', function (req, res, next) {
   const isProduction = process.env.NODE_ENV === 'production';
-  res.render('credit.html', {
+  res.render('credit_en.html', {
     isProduction
   });
 });

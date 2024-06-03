@@ -15,9 +15,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'views/index.html'),
-        //main: resolve(__dirname, 'src/server/views/index.html'),
+        main_en: resolve(__dirname, 'views/index_en.html'),
         credit: resolve(__dirname, 'views/credit.html'),
-        //credit: resolve(__dirname, 'src/server/views/credit.html'),
+        credit_en: resolve(__dirname, 'views/credit_en.html'),
       },
     },
   }

@@ -7,6 +7,7 @@ let sound_beep;
 let score;
 let full_score;
 let type;
+let language;
 let closeBtn = document.getElementById("btn-close");
 let closeBtnRecord = document.getElementById("btn-close-record");
 
@@ -64,7 +65,7 @@ class PhaserGame {
     }
 
 
-    init(id) {
+    init(id, lang) {
         if (type == "record") {
             this.parent_id = `modal-body-record`;
         }
@@ -73,6 +74,7 @@ class PhaserGame {
         }
         console.log("parent",this.parent_id);
         music = register_music(id);
+        language = lang;
         let config = {
             type: Phaser.AUTO,
             scale: {
@@ -100,10 +102,14 @@ class PhaserGame {
  */
 class MenuScene {
     create() {
+        this.message = "SPACEで開始";
+        if(language == "en"){
+          this.message = "Press SPACEBAR to start";
+        }
         this.text = this.add.text(
             1920 / 2,
             1080 / 2,
-            "SPACEで開始",
+            this.message,
             { fontFamily: "arial", fontSize: "100px" }
         );
         this.text.setOrigin(0.5, 0.5);
@@ -401,10 +407,14 @@ class MainScene {
 
 class ResultScene {
     create() {
+        this.message = `あなたのスコア： ${score}\n\nSPACE：再トライ\n\nENTER：結果を保存して終了`;
+        if (language == "en"){
+            this.message = `Your score： ${score}\n\nSPACEBAR：Retry\n\nENTER：Save the results and exit`;
+        }
         this.text = this.add.text(
             1920 / 2,
             1080 / 2,
-            `あなたのスコア： ${score}\n\nSPACE：再トライ\n\nENTER：結果を保存して終了`,
+            this.message,
             { fontFamily: "arial", fontSize: "100px" }
         );
         this.text.setOrigin(0.5, 0.5);
@@ -428,7 +438,12 @@ class ResultScene {
             console.log("maxRate",maxRate);
             console.log("max",Math.max(maxRate, rate));
             if(score > maxScore) {
-                alert("ハイスコア更新！")
+                if ( language == "en"){
+                    alert("New record!");
+                }
+                else{
+                    alert("ハイスコア更新！");
+                }
             }
             if(rate == 100) {
                 document.getElementById(scoreId).style.color = "green";

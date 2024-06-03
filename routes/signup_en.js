@@ -12,8 +12,8 @@ router.post('/', function (req, res, next) {
       .select("*")
       .then(async function (result) {
         if (result.length !== 0) {
-          req.session.error = 'このユーザ名は既に使われています';
-          res.redirect("/");
+          req.session.error = 'This username is already in use.';
+          res.redirect("/en");
         }
         else {
             const hashedPassword = await bcrypt.hash(password, 10);
@@ -27,7 +27,7 @@ router.post('/', function (req, res, next) {
                   .select("*")
                   .then(async function (results) {
                     req.session.userid = results[0].id;
-                    res.redirect("/");
+                    res.redirect("/en");
                   })
               })
             }
@@ -35,7 +35,7 @@ router.post('/', function (req, res, next) {
       .catch(function (err) {
         console.error(err);
         req.session.error = err.sqlMessage;
-        res.redirect("/");
+        res.redirect("/en");
       });
   });
 
