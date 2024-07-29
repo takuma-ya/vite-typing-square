@@ -129,7 +129,6 @@ class MainScene {
         this.load.audio("music", "/musics/" + music.src);
         this.load.audio("collision", "/musics/kati.mp3");
         this.load.audio("beep", "/musics/beep.mp3");
-        this.load.image("Stamp", "/images/nikukyu.png");
         this.load.image("KeyA", "/images/keyA.png");
         this.load.image("KeyB", "/images/keyB.png");
         this.load.image("KeyC", "/images/keyC.png");
@@ -176,6 +175,9 @@ class MainScene {
         this.record = [];
         this.colliders = [];    // colliders for player input vs falling note
         this.characters = ["KeyA", "KeyB", "KeyC", "KeyD", "KeyE", "KeyF", "KeyG", "KeyH", "KeyI", "KeyJ", "KeyK", "KeyL", "KeyM", "KeyN", "KeyO", "KeyP", "KeyQ", "KeyR", "KeyS", "KeyT", "KeyU", "KeyV", "KeyW", "KeyX", "KeyY", "KeyZ"];
+        this.upper_characters = ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO"];
+        this.middle_characters = ["KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL"];
+        this.lower_characters = ["KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM"];
         this.charIndex = 0;
         this.endTimestamp = music.time;
         this.firstKeysPressed = [];
@@ -186,11 +188,14 @@ class MainScene {
         
 
         this.backImage = this.add.image(1920 / 2, 1080 / 2, 'sky').setDisplaySize(1920,1080);
-        this.noteBar = this.add.rectangle(1920 / 2, 800, 1920, 300, 0x104e60);
-        this.targetBar = this.add.rectangle(200, 800, 10, 300, 0x000000);
+        this.noteBarTop = this.add.rectangle(1920 / 2, 500, 1920, 180, 0x104e60);
+        this.noteBarCenter = this.add.rectangle(1920 / 2, 700, 1920, 180, 0x104e60);
+        this.noteBarBottom = this.add.rectangle(1920 / 2, 900, 1920, 180, 0x104e60);
+        this.targetBar = this.add.rectangle(200, 700, 10, 580, 0x000000);
 
-        this.character = this.add.image(1920 / 2, 350, 'character');
-        this.character.scale = 0.4;
+        this.character = this.add.image(1920 / 2, 200, 'character');
+        this.character.scale = 0.3;
+        this.character_position = 700; 
 
         // The score text
         this.scoreText = this.add.text(100, 100, "SCORE", { fontFamily: "arial", fontSize: "100px" });
@@ -253,10 +258,21 @@ class MainScene {
         // This is self explanatory. Spawn the note and let it fall to the bottom.
         //let note = this.add.circle(1920 / 2, 0, 20, 0xffff00);
         this.charIndex = Math.floor(Math.random() * this.characters.length);
-        let note = this.add.image(1920, 800, this.characters[this.charIndex]).setDisplaySize(150,150);
+        let character_position;
+        console.log(this.characters[this.charIndex])
+        if (this.upper_characters.includes(this.characters[this.charIndex])){
+            this.character_position = 500;
+        }
+        else if (this.middle_characters.includes(this.characters[this.charIndex])){
+            this.character_position = 700;
+        }
+        else if (this.lower_characters.includes(this.characters[this.charIndex])){
+            this.character_position = 900;
+        }
+        let note = this.add.image(1920, this.character_position, this.characters[this.charIndex]).setDisplaySize(150,150);
         this.notes.push(note);
         this.physics.add.existing(note);
-        this.physics.moveTo(note, 200, 800, null, this.timeToFall);
+        this.physics.moveTo(note, 200, this.character_position, null, this.timeToFall);
     }
 
     spawnRecordNote(is_main, timestamp) {
@@ -280,7 +296,7 @@ class MainScene {
         this.firstKeysPressed = getFirstKeysPressed()
         if (this.firstKeysPressed.length != 0) {
             // we create a new collider at the position of the red bar
-            let collider = this.add.image(200, 800, "Stamp").setDisplaySize(this.collider_size,this.collider_size);
+            let collider = this.add.rectangle(200, 700, 20, 580, 0xc0c0c0);
 
             // attach physics
             this.physics.add.existing(collider);

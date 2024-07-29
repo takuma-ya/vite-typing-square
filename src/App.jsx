@@ -272,10 +272,10 @@ function App(props) {
                       <img src={music.image} className="card-img-top" style={{ width: '100%', aspectRatio: '1.5' }} alt="..." />
                       <div className="card-body">
                         <h5 className="card-title">{music.title}</h5>
-                        <p className="card-text">Level:
+                        <p className="card-text">Level:&nbsp;
                           <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleLevelFilter(music.level)}> {music.level} </button>
                         </p>
-                        <p className="card-text">Category:
+                        <p className="card-text">Category:&nbsp;
                           <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter(music.category)}> {music.category} </button>
                         </p>
                         {rates[music.id-1] === 100 ? (
@@ -325,10 +325,10 @@ function App(props) {
               <input type="text" className="form-control mb-sm-2" id="password" name="password" required />
               <div className="row">
                 <div className="col-sm-6">
-                  <button type="submit" className="btn btn-success btn-sm" formAction="/en/signup">Sign up</button>
+                  <button type="submit" className="btn btn-success btn-sm" formAction="/en/signup">Sign<br/>up</button>
                 </div>
                 <div className="col-sm-6">
-                  <button type="submit" className="btn btn-primary btn-sm" formAction="/en/signin">Sign in</button>
+                  <button type="submit" className="btn btn-primary btn-sm" formAction="/en/signin">Sign<br/>in</button>
                 </div>
               </div>
             </form>
