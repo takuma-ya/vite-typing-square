@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node ./app.js",
     "start": "NODE_ENV=production node ./app.js",
-    "build": "vite build"
+    "build:client": "vite build --ssrManifest",
+    "build:server": "vite build --outDir dist/server --ssr src/main_ssr.jsx && vite build --outDir dist/server_en --ssr src/main_en_ssr.jsx"
   },
   "dependencies": {
     "bcrypt": "",
@@ -22,17 +23,19 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-refresh": "^0.14.2",
-    "vite-express": "^0.16.0"
+    "vite-express": "^0.16.0",
+    "compression": "",
+    "sirv": "",
+    "vite": "^5.0.2",
+    "@vitejs/plugin-react": "^4.2.0",
+    "vite-plugin-ejs": "1.7.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.38",
     "@types/react-dom": "^18.2.16",
-    "@vitejs/plugin-react": "^4.2.0",
-    "vite-plugin-ejs": "1.7.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.6",
-    "vite": "^5.0.2"
+    "eslint-plugin-react-refresh": "^0.4.6"
   }
 }

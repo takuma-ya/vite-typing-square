@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Takuma Yamashita">
     <link rel="icon" href="/images/typing-square.ico">
-    <title>【Typing Square】音ゲー感覚で遊べるタイピングゲーム広場</title>
-    <meta name="description" content="Typing Squareはリズムゲームの要素を組み込んだ無料のタイピングゲームです。音楽に沿ってランダムに流れてくるキーをタイミングよく叩いてハイスコアを目指そう！">
+    <title>【Typing Square】About Typing Square</title>
+    <meta name="description" content="Typing Square is a free typing game that incorporates elements of rhythm games. Hit the randomly generated keys in time with the music to get a high score!">
 
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
   </head>
@@ -23,17 +23,6 @@
     </script>
   <% } %>
 
-  <% if (! isProduction) { %>
-    <!-- https://ja.vitejs.dev/guide/backend-integration.html -->
-    <script type="module">
-      import RefreshRuntime from 'http://localhost:3000/@react-refresh'
-      RefreshRuntime.injectIntoGlobalHook(window)
-      window.$RefreshReg$ = () => {}
-      window.$RefreshSig$ = () => (type) => type
-      window.__vite_plugin_react_preamble_installed__ = true
-    </script>
-  <% } %>
-
   <body>
     <main class="bg-body-secondary">
       <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="background-color: skyblue;">
@@ -43,19 +32,27 @@
         <a href="/" style="width: 80%; text-align: center">
           <img src="/images/logo.png" style="width: 70%">
         </a>
-        
       </header>
       <div class="container">
-        <div id="root"><!--ssr-outlet--></div>
+        <div class="mx-1 p-3 bg-body">
+          <h1 class="mt-4">About Typing Square</h1>
+          <p>
+            Typing Square is a completely free typing game that feels like a rhythm game.<br>
+Aim for a high score by pressing the randomly appearing keys at the right time.<br>
+You can save your scores by signing in.
+          </p>
+          <h2 class="mt-4">Contact</h2>
+          <p>
+            contact@typing-square.com
+          </p>
+        </div>
       </div>
 
-     
-      
       <div class="container-fluid bg-body">
         <footer class="py-3 my-4">
           <ul class="nav justify-content-around border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="/about" class="nav-link px-2 text-body-secondary">Typing Squareについて</a></li>
-            <li class="nav-item"><a href="/credit" class="nav-link px-2 text-body-secondary">使用楽曲、およびイラストの詳細</a></li>
+            <li class="nav-item"><a href="/en/about" class="nav-link px-2 text-body-secondary">About Typing Square</a></li> 
+            <li class="nav-item"><a href="/en/credit" class="nav-link px-2 text-body-secondary">Details of music and illustrations used</a></li>
             <li class="nav-item dropdown">
               <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
               <div class="dropdown-menu dropdown-menu-right">
@@ -71,38 +68,12 @@
           <p class="text-center text-body-secondary">&copy; 2024 Typing Square</p>
         </footer>
       </div>
-
-      <!-- Modal -->
-
-      <div class="modal fade" id="game-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="modal-body">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="record-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="btn-close" id="btn-close-record" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body-record" id="modal-body-record">
-            </div>
-          </div>
-        </div>
-      </div>
     </main>
 
     <script src="/javascripts/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
     <script type="module" src="../src/main.jsx"></script>
     <script src="/javascripts/utils.js"></script>
-      
   </body>
 </html>
+

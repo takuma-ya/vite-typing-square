@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
-import { register_music, PhaserGame } from './game.js' 
+import { register_music, PhaserGame } from './game.js'
+
+import  musicListSource from './data/music_list.json'
+import  musicListSourceEn from './data/music_list_en.json'
 
 let phaserGame;
 let game;
@@ -7,15 +10,24 @@ let closeBtn;
 let closeBtnRecord;
 let stored_data;
 let music_id;
-window.score = -1;
+let musicListJson;
+if (typeof window !== "undefined") {
+  window.score = -1;
+}
 
 function App(props) {
+  if(props.lang=="english") {
+    musicListJson = musicListSourceEn; 
+  } else {
+    musicListJson = musicListSource; 
+  }
+
   const [count, setCount] = useState(0)
   const [scores, setScores] = useState([])
   const [rates, setRates] = useState([])
   // 初期化を検知するフラグ
   const [loading, setLoading] = useState(true);
-  const [musicData, setMusicData] = useState([]);
+  const [musicList, setMusicList] = useState(musicListJson);
   const [sortBy, setSortBy] = useState('id'); // 初期値はIDが大きい順
   const [sortOrder, setSortOrder] = useState('desc'); // 初期値は降順
   const [filterLevel, setFilterLevel] = useState(''); // 初期値は全てのレベル
@@ -45,24 +57,26 @@ function App(props) {
     })
   };
 
-  const fetchMusicData = async () => {
-    let musicDataPath = '/jsons/music_data.json';
+/*
+  const fetchMusicList = async () => {
+    let musicListPath = '/jsons/music_data.json';
     if(props.lang=="english") {
-        musicDataPath = '/jsons/music_data_en.json';
+        musicListPath = '/jsons/music_data_en.json';
     }
-    fetch(musicDataPath)
+    fetch(musicListPath)
     .then(response => response.json())
     .then(data => {
         // 取得したデータをログに出力
-        console.log('Music Data:', data);
+        console.log('Music List:', data);
 
         // 取得したデータを適切な処理に渡す（例：グラフに表示するなど）
-        setMusicData(data)
+        setMusicList(data)
     })
     .catch(error => {
         console.error('Error fetching data:', error);
     })
   };
+*/
 /*
   const handleFormSubmit = (e, action) => {
     console.log("e",e);
@@ -127,7 +141,7 @@ function App(props) {
 
   // フィルタリングおよびソート適用後のデータを返す
   const filteredAndSortedData = () => {
-    let filteredData = musicData;
+    let filteredData = musicList;
     if (filterLevel) {
       filteredData = filteredData.filter((music) => music.level === filterLevel);
     }
@@ -186,7 +200,7 @@ function App(props) {
       return;
     }
     fetchUserData();
-    fetchMusicData();
+    //fetchMusicList();
     // 初期化済みのフラグを立てる
     setLoading(false);
     closeBtn = document.getElementById("btn-close");
@@ -203,6 +217,7 @@ function App(props) {
         }
     };
   }, []);
+
 
 
   if(props.lang=="english") {

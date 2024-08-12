@@ -8,9 +8,12 @@ let score;
 let full_score;
 let type;
 let language;
-let closeBtn = document.getElementById("btn-close");
-let closeBtnRecord = document.getElementById("btn-close-record");
-
+let closeBtn;
+let closeBtnRecord
+if (typeof document !== "undefined") {
+  closeBtn = document.getElementById("btn-close");
+  closeBtnRecord = document.getElementById("btn-close-record");
+}
 
 function register_music(music_id) {
   // music_id に対応する音楽情報を取得

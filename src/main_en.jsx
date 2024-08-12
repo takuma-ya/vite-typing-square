@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 
 const lang = "english"
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.hydrateRoot(document.getElementById('root'),
   <React.StrictMode>
     <App lang={lang} />
-  </React.StrictMode>,
+  </React.StrictMode>
 )
