@@ -444,9 +444,9 @@ function App(props) {
                         <button type="button" className="btn btn-info btn-selector" data-bs-toggle="modal" data-bs-target="#game-modal" onClick={() => {startGame(music.id)}}> 
                           Play Game!
                         </button>
-                        {/*<button type="button" className="btn btn-info btn-selector" data-bs-toggle="modal" data-bs-target="#record-modal" onClick={() => {recordGame(music.id)}}> 
+                        <button type="button" className="btn btn-info btn-selector" data-bs-toggle="modal" data-bs-target="#record-modal" onClick={() => {recordGame(music.id)}}> 
                           Record Game!
-                        </button>*/}
+                        </button>
                       </div>
                     </div>
                   </div>
