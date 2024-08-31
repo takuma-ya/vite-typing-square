@@ -1,4 +1,4 @@
-<audio style="display:none" controls src="/public/musics/pops_up_the_mind_wings.mp3"></audio>
+<audio style="display:none" controls src="/public/musics/chinese_tea.mp3"></audio>
 <button onclick="startRecord()">Start</button>
 <button onclick="stopRecord()">Stop</button>
 
@@ -11,8 +11,8 @@ Press the "START" button, then tap any key (es. spacebar) to record the note tim
 
 <script>
     // The goal is: playback the song and record notes on-the-fly
-    let bpm = 91;
-    let first_note = 8500;
+    let bpm = 71.5;
+    let first_note = 16500;
     let timeUnit = 1000 * 60 / bpm / 4;
     let start = first_note % timeUnit;
     console.log(timeUnit);

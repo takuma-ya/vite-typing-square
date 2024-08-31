@@ -277,6 +277,9 @@ function App(props) {
               <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('Rock')}>
                Rock 
               </button>
+              <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('Touhou')}>
+               Touhou 
+              </button>
             </div>
 
             {/* 音楽カード表示 */}
@@ -413,6 +416,9 @@ function App(props) {
               </button>
               <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('ロック')}>
                 ロック
+              </button>
+              <button className="btn btn-sm btn-outline-dark me-2" onClick={() => handleCategoryFilter('東方')}>
+                東方 
               </button>
             </div>
 
