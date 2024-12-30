@@ -3,7 +3,7 @@ import express from 'express'
 import knex from '../db/knex.js'
 const router = express.Router();
 
-const num_music = 11;
+const num_music = 14;
 
 router.get('/', function (req, res, next) {
   let userId = req.session.userid;
