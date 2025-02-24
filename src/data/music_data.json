@@ -152,5 +152,16 @@
     "beat": 2,
     "volume": 1.0,
     "character": "kohaku_piano.png"
+  },
+  {
+    "number": 15,
+    "src": "cirno.mp3",
+    "note": "cirno.json",
+    "time": 123000,
+    "bpm": 87.5,
+    "first_ts": 12000,
+    "beat": 2,
+    "volume": 1.0,
+    "character": "kohaku_piano.png"
   }
 ]
