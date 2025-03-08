@@ -460,7 +460,6 @@ function App(props) {
             </div>
           </div>
         </div>
-
         <div className="col-sm-2 bg-body">
           <div className="mx-1 p-3">
             {isAuth ? (

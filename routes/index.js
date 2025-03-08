@@ -57,6 +57,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/en/', function (req, res, next) {
   const isProduction = process.env.NODE_ENV === 'production';
+  
   res.render('index_en.html', {
     isProduction
   });

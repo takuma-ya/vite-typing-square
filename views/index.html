@@ -9,6 +9,30 @@
     <meta name="description" content="Typing Squareはリズムゲームの要素を組み込んだ無料のタイピングゲームです。音楽に沿ってランダムに流れてくるキーをタイミングよく叩いてハイスコアを目指そう！">
 
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .ranking-table {
+            max-width: 600px;
+            margin: auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            table-layout: fixed;
+        }
+
+        .ranking-table th, .ranking-table td {
+            text-align: center;
+        }
+
+        .ranking-table td, .ranking-table th {
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .ranking-table td:nth-child(2) {
+            max-width: 1px;
+        }
+    </style>
   </head>
 
   <% if (isProduction) { %>
@@ -34,6 +58,7 @@
     </script>
   <% } %>
 
+
   <body>
     <main class="bg-body-secondary">
       <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="background-color: skyblue;">
@@ -45,6 +70,40 @@
         </a>
         
       </header>
+      <div class="container">
+        <div class="my-3 p-3">
+          <table class="table ranking-table">
+              <thead>
+                  <tr class="table-info">
+                      <th style="width: 15%">#</th>
+                      <th style="width: 35%">名前</th>
+                      <th style="width: 30%">合計スコア</th>
+                      <th style="width: 20%">達成率</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr class="gold">
+                      <td>🥇</td>
+                      <td> <%= user1st %> </td>
+                      <td> <%= score1st %> </td>
+                      <td> <%= ratio1st %>%　</td>
+                  </tr>
+                  <tr class="silver">
+                      <td>🥈</td>
+                      <td> <%= user2nd %> </td>
+                      <td> <%= score2nd %> </td>
+                      <td> <%= ratio2nd %>%　</td>
+                  </tr>
+                  <tr class="bronze">
+                      <td>🥉</td>
+                      <td> <%= user3rd %> </td>
+                      <td> <%= score3rd %> </td>
+                      <td> <%= ratio3rd %>%　</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
       <div class="container">
         <div id="root"><!--ssr-outlet--></div>
       </div>

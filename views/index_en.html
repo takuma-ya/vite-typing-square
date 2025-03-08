@@ -5,10 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Takuma Yamashita">
     <link rel="icon" href="/images/typing-square.ico">
-    <title>【Typing Square】A typing game square where you can play with the feel of a rhythm game</title>
-    <meta name="description" content="Typing Square is a free typing game that incorporates elements of rhythm games. Hit the randomly generated keys in time with the music to get a high score!">
+    <title>【Typing Square】Typing Rhythm Game</title>
+    <meta name="description" content="Typing Square is a free browser game that combines a rhythm game and a typing game. Hit the randomly generated keys in time with the music to get a high score!">
 
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .ranking-table {
+          max-width: 600px;
+          margin: auto;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          table-layout: fixed;
+      }
+
+      .ranking-table th, .ranking-table td {
+          text-align: center;
+      }
+
+      .ranking-table td, .ranking-table th {
+          word-wrap: break-word;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+      }
+      .ranking-table td:nth-child(2) {
+          max-width: 1px;
+      }
+    </style>
   </head>
 
   <% if (isProduction) { %>
@@ -45,6 +69,40 @@
         </a>
         
       </header>
+      <div class="container">
+        <div class="my-3 p-3">
+          <table class="table ranking-table">
+              <thead>
+                  <tr class="table-info">
+                      <th style="width: 15%">#</th>
+                      <th style="width: 35%">Name</th>
+                      <th style="width: 30%">Full Score</th>
+                      <th style="width: 20%">Ratio</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr class="gold">
+                      <td>🥇</td>
+                      <td> <%= user1st %> </td>
+                      <td> <%= score1st %> </td>
+                      <td> <%= ratio1st %>%　</td>
+                  </tr>
+                  <tr class="silver">
+                      <td>🥈</td>
+                      <td> <%= user2nd %> </td>
+                      <td> <%= score2nd %> </td>
+                      <td> <%= ratio2nd %>%　</td>
+                  </tr>
+                  <tr class="bronze">
+                      <td>🥉</td>
+                      <td> <%= user3rd %> </td>
+                      <td> <%= score3rd %> </td>
+                      <td> <%= ratio3rd %>%　</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
       <div class="container">
         <div id="root"><!--ssr-outlet--></div>
       </div>

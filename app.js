@@ -73,6 +73,41 @@ async function createServer() {
     app.use(sirv('./dist', { extensions: [] }))
   }
 
+  // すべてのスコアの合計を計算
+  const directoryPath = path.join(__dirname, 'public/jsons');
+  let totalScore;
+  fs.readdir(directoryPath, (err, files) => {
+      if (err) {
+          console.error('Error reading directory:', err);
+          return;
+      }
+  
+      let totalCount = 0;
+  
+      files.forEach(file => {
+          const filePath = path.join(directoryPath, file);
+          
+          if (path.extname(file) === '.json') {
+              try {
+                  const data = fs.readFileSync(filePath, 'utf8');
+                  const jsonArray = JSON.parse(data);
+                  
+                  if (Array.isArray(jsonArray)) {
+                      totalCount += jsonArray.length;
+                  }
+              } catch (error) {
+                  console.error(`Error reading or parsing ${file}:`, error);
+              }
+          }
+      });
+  
+      console.log('Total count of elements:', totalCount);
+      totalScore = totalCount * 100;
+  });
+
+  
+
+
   const router = express.Router();
 
   router.get('/', async function (req, res, next) {
@@ -90,13 +125,38 @@ async function createServer() {
       }
 
       const appHtml = await render(url, ssrManifest)
+      let rankedScores = knex('scores as s1')
+        .select(
+          's1.user_id', 
+          'u.name as user_name', 
+          's1.music_id', 
+          's1.score',
+          knex.raw('RANK() OVER (PARTITION BY s1.user_id, s1.music_id ORDER BY s1.score DESC) as rnk')
+        )
+        .join('users as u', 's1.user_id', 'u.id')
+        .as('ranked_scores');
+
+      let results= await knex
+        .select('user_id', 'user_name')
+        .sum('score as total_score')
+        .from(rankedScores)
+        .where('rnk', 1)
+        .groupBy('user_id', 'user_name')
+        .orderBy('total_score', 'desc')
+        .limit(3);
 
       res.render('index.html', {
         isProduction: isProduction,
-      }, function (err, html) {
-        res.send(html.replace(`<!--ssr-outlet-->`, appHtml))
+        user1st: results[0].user_name,
+        user2nd: results[1].user_name,
+        user3rd: results[2].user_name,
+        score1st: results[0].total_score,
+        score2nd: results[1].total_score,
+        score3rd: results[2].total_score,
+        ratio1st: Math.min(Math.floor(100 * results[0].total_score / totalScore), 100),
+        ratio2nd: Math.min(Math.floor(100 * results[1].total_score / totalScore), 100),
+        ratio3rd: Math.min(Math.floor(100 * results[2].total_score / totalScore), 100),
       })
-
     } catch (e) {
       vite?.ssrFixStacktrace(e)
       console.log(e.stack)
@@ -120,10 +180,37 @@ async function createServer() {
 
       const appHtml = await render(url, ssrManifest)
 
-      res.render('index_en.html', {
+      let rankedScores = knex('scores as s1')
+        .select(
+          's1.user_id', 
+          'u.name as user_name', 
+          's1.music_id', 
+          's1.score',
+          knex.raw('ROW_NUMBER() OVER (PARTITION BY s1.user_id, s1.music_id ORDER BY s1.score DESC) as rnk')
+        )
+        .join('users as u', 's1.user_id', 'u.id')
+        .as('ranked_scores');
+
+      let results= await knex
+        .select('user_id', 'user_name')
+        .sum('score as total_score')
+        .from(rankedScores)
+        .where('rnk', 1)
+        .groupBy('user_id', 'user_name')
+        .orderBy('total_score', 'desc')
+        .limit(3);
+
+      res.render('index.html', {
         isProduction: isProduction,
-      }, function (err, html) {
-        res.send(html.replace(`<!--ssr-outlet-->`, appHtml))
+        user1st: results[0].user_name,
+        user2nd: results[1].user_name,
+        user3rd: results[2].user_name,
+        score1st: results[0].total_score,
+        score2nd: results[1].total_score,
+        score3rd: results[2].total_score,
+        ratio1st: Math.min(Math.floor(100 * results[0].total_score / totalScore), 100),
+        ratio2nd: Math.min(Math.floor(100 * results[1].total_score / totalScore), 100),
+        ratio3rd: Math.min(Math.floor(100 * results[2].total_score / totalScore), 100),
       })
 
     } catch (e) {
