@@ -1,0 +1,222 @@
+[
+  {
+    "number": 1,
+    "src": "BKOJ001_91BPM.mp3",
+    "note": "BKOJ001_91BPM.json",
+    "time": 75000,
+    "bpm": 91,
+    "first_ts": 11260,
+    "beat": 4,
+    "volume": 0.5,
+    "character": "kohaku_dj.png"
+  },
+  {
+    "number": 2,
+    "src": "BKOJ002_81BPM.mp3",
+    "note": "BKOJ002_81BPM.json",
+    "time": 96000,
+    "bpm": 81,
+    "first_ts": 6320,
+    "beat": 4,
+    "volume": 0.5,
+    "character": "kohaku_dj.png"
+  },
+  {
+    "number": 3,
+    "src": "BKOJ003_120BPM.mp3",
+    "note": "BKOJ003_120BPM.json",
+    "time": 48500,
+    "bpm": 120,
+    "first_ts": 8500,
+    "beat": 3,
+    "volume": 0.5,
+    "character": "kohaku_dj.png"
+  },
+  {
+    "number": 4,
+    "src": "canon.mp3",
+    "note": "canon.json",
+    "time": 87000,
+    "bpm": 90,
+    "first_ts": 11500,
+    "beat": 4,
+    "volume": 1.5,
+    "character": "kohaku_conductor.png"
+  },
+  {
+    "number": 5,
+    "src": "reggae.mp3",
+    "note": "reggae.json",
+    "time": 97000,
+    "bpm": 82,
+    "first_ts": 12670,
+    "beat": 4,
+    "volume": 0.5,
+    "character": "kohaku_dj.png"
+  },
+  {
+    "number": 6,
+    "src": "kurumi.mp3",
+    "note": "kurumi.json",
+    "time": 74000,
+    "bpm": 134,
+    "first_ts": 8065,
+    "beat": 4,
+    "volume": 5,
+    "character": "kohaku_conductor.png"
+  },
+  {
+    "number": 7,
+    "src": "carmen.mp3",
+    "note": "carmen.json",
+    "time": 60000,
+    "bpm": 135,
+    "first_ts": 4060,
+    "beat": 1,
+    "volume": 0.8,
+    "character": "kohaku_conductor.png"
+  },
+  {
+    "number": 8,
+    "src": "Sleepiness.mp3",
+    "note": "Sleepiness.json",
+    "time": 84000,
+    "bpm": 93,
+    "first_ts": 5840,
+    "beat": 2,
+    "volume": 1.0,
+    "character": "kohaku_drum.png"
+  },
+  {
+    "number": 9,
+    "src": "magical_cooking.mp3",
+    "note": "magical_cooking.json",
+    "time": 67000,
+    "bpm": 72.6,
+    "first_ts": 7265,
+    "beat": 2,
+    "volume": 0.5,
+    "character": "kohaku_piano.png"
+  },
+  {
+    "number": 10,
+    "src": "pops_up_the_mind_wings.mp3",
+    "note": "pops_up_the_mind_wings.json",
+    "time": 48500,
+    "bpm": 105,
+    "first_ts": 4870,
+    "beat": 2,
+    "volume": 0.5,
+    "character": "kohaku_piano.png"
+  },
+  {
+    "number": 11,
+    "src": "chinese_tea.mp3",
+    "note": "chinese_tea.json",
+    "time": 97700,
+    "bpm": 71.5,
+    "first_ts": 16400,
+    "beat": 2,
+    "volume": 0.5,
+    "character": "kohaku_piano.png"
+  },
+  {
+    "number": 12,
+    "src": "UNowen.mp3",
+    "note": "UNowen.json",
+    "time": 60000,
+    "bpm": 77.5,
+    "first_ts": 15650,
+    "beat": 4,
+    "volume": 0.3,
+    "character": "kohaku_piano.png"
+  },
+  {
+    "number": 13,
+    "src": "septet.mp3",
+    "note": "septet.json",
+    "time": 78000,
+    "bpm": 142,
+    "first_ts": 13700,
+    "beat": 2,
+    "volume": 0.3,
+    "character": "kohaku_piano.png"
+  },
+  {
+    "number": 14,
+    "src": "marisa.mp3",
+    "note": "marisa.json",
+    "time": 116000,
+    "bpm": 170,
+    "first_ts": 5890,
+    "beat": 2,
+    "volume": 0.4,
+    "character": "kohaku_piano.png"
+  },
+  {
+    "number": 15,
+    "src": "cirno.mp3",
+    "note": "cirno.json",
+    "time": 123000,
+    "bpm": 87.5,
+    "first_ts": 12000,
+    "beat": 2,
+    "volume": 0.4,
+    "character": "kohaku_piano.png"
+  },
+  {
+    "number": 16,
+    "src": "kanbu.mp3",
+    "note": "kanbu.json",
+    "time": 145000,
+    "bpm": 100,
+    "first_ts": 10150,
+    "beat": 2,
+    "volume": 0.4,
+    "character": "kohaku_piano.png"
+  },
+  {
+    "number": 17,
+    "src": "scarlet.mp3",
+    "note": "scarlet.json",
+    "time": 103000,
+    "bpm": 80,
+    "first_ts": 32350,
+    "beat": 2,
+    "volume": 0.4,
+    "character": "kohaku_piano.png"
+  },
+  {
+    "number": 18,
+    "src": "hikari.wav",
+    "note": "hikari.json",
+    "time": 80000,
+    "bpm": 71,
+    "first_ts": 7600,
+    "beat": 2,
+    "volume": 0.3,
+    "character": "kohaku_drum.png"
+  },
+  {
+    "number": 19,
+    "src": "breezevibe.wav",
+    "note": "breezevibe.json",
+    "time": 93000,
+    "bpm": 41.5,
+    "first_ts": 12270,
+    "beat": 2,
+    "volume": 0.5,
+    "character": "kohaku_drum.png"
+  },
+  {
+    "number": 20,
+    "src": "oiran.wav",
+    "note": "oiran.json",
+    "time": 74000,
+    "bpm": 78.5,
+    "first_ts": 3450,
+    "beat": 4,
+    "volume": 0.5,
+    "character": "kohaku_drum.png"
+  }
+]

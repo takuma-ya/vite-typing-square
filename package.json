@@ -1,0 +1,41 @@
+{
+  "name": "typing-square",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node ./app.js",
+    "start": "NODE_ENV=production node ./app.js",
+    "build:client": "vite build --ssrManifest && bash bulid_sub_script.sh",
+    "build:server": "vite build --outDir dist/server --ssr src/main_ssr.jsx && vite build --outDir dist/server_en --ssr src/main_en_ssr.jsx"
+  },
+  "dependencies": {
+    "bcrypt": "",
+    "cookie-parser": "~1.4.4",
+    "cookie-session": "",
+    "debug": "~2.6.9",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "http-errors": "~1.6.3",
+    "knex": "^3.0.1",
+    "morgan": "~1.9.1",
+    "mysql2": "^3.9.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-refresh": "^0.14.2",
+    "vite-express": "^0.16.0",
+    "compression": "",
+    "sirv": "",
+    "vite": "^5.0.2",
+    "@vitejs/plugin-react": "^4.2.0",
+    "vite-plugin-ejs": "1.7.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.38",
+    "@types/react-dom": "^18.2.16",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6"
+  }
+}

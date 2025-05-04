@@ -1,0 +1,182 @@
+[
+  {
+    "id": 20,
+    "title": "Oiran🌸Blooming",
+    "level": "★★★★★",
+    "category": "Vocaloid",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/oiran.jpg"
+  },
+  {
+    "id": 19,
+    "title": "Breezevibe - Thoughts dancing in the wind",
+    "level": "★☆☆☆☆",
+    "category": "Vocaloid",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/breezevibe.jpg"
+  },
+  {
+    "id": 18,
+    "title": "Dazzling ☆ Light",
+    "level": "★★☆☆☆",
+    "category": "Vocaloid",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/hikari.jpg"
+  },
+  {
+    "id": 17,
+    "title": "Scarlet Police on Ghetto Patrol in 24 Hours",
+    "level": "★★☆☆☆",
+    "category": "Touhou",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/scarlet.jpg"
+  },
+  {
+    "id": 16,
+    "title": "Stops at the affected area and immediately dissolves ~ Lunatic Udongein",
+    "level": "★★★★☆",
+    "category": "Touhou",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/kanbu.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Cirno's Perfect Math Class",
+    "level": "★★★☆☆",
+    "category": "Touhou",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/cirno.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Marisa Stole the Precious Thing",
+    "level": "★★★★★",
+    "category": "Touhou",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/marisa.webp"
+  },
+  {
+    "id": 13,
+    "title": "Septette for a Dead Princess",
+    "level": "★☆☆☆☆",
+    "category": "Touhou",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/septet.jpg"
+  },
+  {
+    "id": 12,
+    "title": "U.N. Owen Was Her?",
+    "level": "★★★★☆",
+    "category": "Touhou",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/UNowen.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Chinese Tea",
+    "level": "★★★★☆",
+    "category": "Touhou",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/chinese_tea.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Pops up the mind wings",
+    "level": "★★☆☆☆",
+    "category": "Jazz",
+    "score": "80",
+    "rate": 80,
+    "image": "/images/atou_spring.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Magical Cooking",
+    "level": "★★★☆☆",
+    "category": "Jazz",
+    "score": "90",
+    "rate": 100,
+    "image": "/images/vegitables.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Sleepiness",
+    "level": "★★☆☆☆",
+    "category": "Rock",
+    "score": "75",
+    "rate": 60,
+    "image": "/images/star.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Carmen",
+    "level": "★☆☆☆☆",
+    "category": "Classical",
+    "score": "65",
+    "rate": 100,
+    "image": "/images/rose.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Nutcracker: March",
+    "level": "★★☆☆☆",
+    "category": "Classical",
+    "score": "85",
+    "rate": 100,
+    "image": "/images/kurumi.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Reggae Time",
+    "level": "★☆☆☆☆",
+    "category": "Hip Hop",
+    "score": "70",
+    "rate": 70,
+    "image": "/images/sunset_beach.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Canon",
+    "level": "★★★★★",
+    "category": "Classical",
+    "score": "95",
+    "rate": 100,
+    "image": "/images/sunflower.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Proper Dose",
+    "level": "★★★☆☆",
+    "category": "Hip Hop",
+    "score": "88",
+    "rate": 88,
+    "image": "/images/dangeon.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Road",
+    "level": "★★★★☆",
+    "category": "Hip Hop",
+    "score": "92",
+    "rate": 92,
+    "image": "/images/summar_road.jpg"
+  },
+  {
+    "id": 1,
+    "title": "Sunset",
+    "level": "★★☆☆☆",
+    "category": "Hip Hop",
+    "score": "78",
+    "rate": 78,
+    "image": "/images/buildings_and_sunset.jpg"
+  }
+]

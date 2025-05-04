@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Takuma Yamashita">
+    <link rel="icon" href="/images/typing-square.ico">
+    <title>【Typing Square】About Typing Square</title>
+    <meta name="description" content="Typing Square is a free browser game that combines a rhythm game and a typing game. Hit the randomly generated keys in time with the music to get a high score!">
+
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <% if (isProduction) { %>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9GMBD15D7C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9GMBD15D7C');
+    </script>
+  <% } %>
+
+  <body>
+    <main class="bg-body-secondary">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="background-color: skyblue;">
+        <!--<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+          <img src="/images/logo.png">
+        </a>-->
+        <a href="/en" style="width: 80%; text-align: center">
+          <img src="/images/logo.png" style="width: 70%">
+        </a>
+      </header>
+      <div class="container">
+        <div class="mx-1 p-3 bg-body">
+          <h1 class="mt-4">About Typing Square</h1>
+          <p>
+            Typing Square is a completely free typing game that feels like a rhythm game.<br>
+Aim for a high score by pressing the randomly appearing keys at the right time.<br>
+You can save your scores by signing in.
+          </p>
+          <h2 class="mt-4">Contact</h2>
+          <p>
+            contact@typing-square.com
+          </p>
+        </div>
+      </div>
+
+      <div class="container-fluid bg-body">
+        <footer class="py-3 my-4">
+          <ul class="nav justify-content-around border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="/en/about" class="nav-link px-2 text-body-secondary">About Typing Square</a></li> 
+            <li class="nav-item"><a href="/en/credit" class="nav-link px-2 text-body-secondary">Details of music and illustrations used</a></li>
+            <li class="nav-item dropdown">
+              <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="/about">
+                  <img src="/images/jp.png" style="width: 30%"> 日本語
+                </a>
+                <a class="dropdown-item" href="/en/about">
+                  <img src="/images/en.png" style="width: 30%"> English
+                </a>
+              </div>
+            </li>
+          </ul>
+          <p class="text-center text-body-secondary">&copy; 2025 Typing Square</p>
+        </footer>
+      </div>
+    </main>
+
+    <script src="/javascripts/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+

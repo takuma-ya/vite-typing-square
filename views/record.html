@@ -1,0 +1,71 @@
+<audio style="display:none" controls src="/public/musics/oiran.wav"></audio>
+<button onclick="startRecord()">Start</button>
+<button onclick="stopRecord()">Stop</button>
+
+<br>
+<textarea id= "textarea_origin" style="width:100%;height:30%"></textarea>
+<textarea id= "textarea_arranged" style="width:100%;height:30%"></textarea>
+<br><br>
+<b>USAGE</b>:<br>
+Press the "START" button, then tap any key (es. spacebar) to record the note timestamp
+
+<script>
+    // The goal is: playback the song and record notes on-the-fly
+    let bpm = 71.5;
+    let first_note = 16500;
+    let timeUnit = 1000 * 60 / bpm / 4;
+    let start = first_note % timeUnit;
+    console.log(timeUnit);
+    console.log(start);
+    let isRecording = false;
+    let preStartTime = null;
+    let startTime = null;
+    let timestamps_origin = [];
+    let timestamps = [];
+    let audio = document.querySelector("audio");
+    let ta_origin = document.getElementById("textarea_origin");
+    let ta = document.getElementById("textarea_arranged");
+
+    async function play_audio(audio) {
+        await audio.play();
+        //startTime = Date.now();
+        startTime = audio.currentTime
+        console.log(startTime)
+    }
+
+    async function startRecord() {
+        preStartTime = Date.now();
+        timestamps = [];
+        isRecording = true;
+        //audio.oncanplaythrough = (event) => {
+        //    console.log('バッファリングを止めることなく、' +'動画全体を再生できると思います。');
+        //    play_audio(audio);
+        //};
+        await audio.play();
+        //startTime = Date.now();
+        startTime = Math.floor(audio.currentTime * 1000)
+        console.log(startTime)
+    }
+
+    function stopRecord() {
+        ta.value = JSON.stringify(timestamps);
+        audio.pause();
+        isRecording = false;
+    }
+
+    window.addEventListener("keydown", function (event) {
+        if (isRecording) {
+            let t_origin = {};
+            let t = {};
+            //t_origin.timestamp = Date.now() - startTime;
+            t_origin.timestamp = Math.floor(audio.currentTime * 1000) - startTime;
+            t.timestamp = Math.floor(start + Math.floor((t_origin.timestamp - start + timeUnit/2) / timeUnit) * timeUnit); 
+            console.log(Math.floor((t_origin.timestamp - start + timeUnit/2) / timeUnit));
+            timestamps_origin.push(t_origin);
+            timestamps.push(t);
+            ta_origin.value = JSON.stringify(timestamps_origin);
+            ta.value = JSON.stringify(timestamps);
+        }
+    });
+
+</script>

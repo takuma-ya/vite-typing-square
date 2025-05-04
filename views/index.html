@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Takuma Yamashita">
+    <link rel="icon" href="/images/typing-square.ico">
+    <title>【Typing Square】音ゲータイピング</title>
+    <meta name="description" content="Typing Squareは音ゲーとタイピングゲームを掛け合わせた無料で遊べるブラウザゲームです。音楽に沿ってランダムに流れてくるキーをタイミングよく叩いてハイスコアを目指そう！">
+
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .ranking-table {
+            max-width: 600px;
+            margin: auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            table-layout: fixed;
+        }
+
+        .ranking-table th, .ranking-table td {
+            text-align: center;
+        }
+
+        .ranking-table td, .ranking-table th {
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .ranking-table td:nth-child(2) {
+            max-width: 1px;
+        }
+    </style>
+  </head>
+
+  <% if (isProduction) { %>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9GMBD15D7C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9GMBD15D7C');
+    </script>
+  <% } %>
+
+  <% if (! isProduction) { %>
+    <!-- https://ja.vitejs.dev/guide/backend-integration.html -->
+    <script type="module">
+      import RefreshRuntime from 'http://localhost:3000/@react-refresh'
+      RefreshRuntime.injectIntoGlobalHook(window)
+      window.$RefreshReg$ = () => {}
+      window.$RefreshSig$ = () => (type) => type
+      window.__vite_plugin_react_preamble_installed__ = true
+    </script>
+  <% } %>
+
+
+  <body>
+    <main class="bg-body-secondary">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="background-color: skyblue;">
+        <!--<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+          <img src="/images/logo.png">
+        </a>-->
+        <a href="/" style="width: 80%; text-align: center">
+          <img src="/images/logo.png" style="width: 70%">
+        </a>
+        
+      </header>
+      <div class="container">
+        <div class="my-3 p-3">
+          <table class="table ranking-table">
+              <thead>
+                  <tr class="table-info">
+                      <th style="width: 15%">#</th>
+                      <th style="width: 35%">名前</th>
+                      <th style="width: 30%">合計スコア</th>
+                      <th style="width: 20%">達成率</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr class="gold">
+                      <td>🥇</td>
+                      <td> <%= user1st %> </td>
+                      <td> <%= score1st %> </td>
+                      <td> <%= ratio1st %>%　</td>
+                  </tr>
+                  <tr class="silver">
+                      <td>🥈</td>
+                      <td> <%= user2nd %> </td>
+                      <td> <%= score2nd %> </td>
+                      <td> <%= ratio2nd %>%　</td>
+                  </tr>
+                  <tr class="bronze">
+                      <td>🥉</td>
+                      <td> <%= user3rd %> </td>
+                      <td> <%= score3rd %> </td>
+                      <td> <%= ratio3rd %>%　</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
+      <div class="container">
+        <div id="root"><!--ssr-outlet--></div>
+      </div>
+
+     
+      
+      <div class="container-fluid bg-body">
+        <footer class="py-3 my-4">
+          <ul class="nav justify-content-around border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="/about" class="nav-link px-2 text-body-secondary">Typing Squareについて</a></li>
+            <li class="nav-item"><a href="/credit" class="nav-link px-2 text-body-secondary">使用楽曲、およびイラストの詳細</a></li>
+            <li class="nav-item dropdown">
+              <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="/">
+                  <img src="/images/jp.png" style="width: 30%"> 日本語
+                </a>
+                <a class="dropdown-item" href="/en">
+                  <img src="/images/en.png" style="width: 30%"> English
+                </a>
+              </div>
+            </li>
+          </ul>
+          <p class="text-center text-body-secondary">&copy; 2025 Typing Square</p>
+        </footer>
+      </div>
+
+      <!-- Modal -->
+
+      <div class="modal fade" id="game-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="record-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" id="btn-close-record" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body-record" id="modal-body-record">
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="/javascripts/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <script type="module" src="../src/main.jsx"></script>
+    <script src="/javascripts/utils.js"></script>
+      
+  </body>
+</html>
